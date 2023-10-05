@@ -1,0 +1,9 @@
+package appstorefactory;
+
+public class Fisica {
+	
+	private String cpf;
+	
+	
+
+}

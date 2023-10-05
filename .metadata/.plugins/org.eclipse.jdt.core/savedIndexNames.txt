@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+E:\backup PROJETO ATUAL JAVA\workspace-projeto-final\.metadata\.plugins\org.eclipse.jdt.core
+895068336.index
+1569049447.index

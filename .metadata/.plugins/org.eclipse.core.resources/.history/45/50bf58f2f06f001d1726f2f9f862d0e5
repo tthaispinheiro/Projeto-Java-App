@@ -1,0 +1,72 @@
+package appstorefactory;
+
+import java.util.Scanner;
+
+public class Principal {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner ler = new Scanner(System.in);
+		String opcao;
+
+		do {
+
+			System.out.println("Menu");
+			System.out.println("1-Criar Conta PESSOA JURÍDICA");
+			System.out.println("2-Criar Conta PESSOA FISICA");
+			System.out.println("3-Cadastrar CARTÃO PESSOA JURÍDICA");
+			System.out.println("4-Cadastrar CARTÃO PESSOA FÍSICA");
+			System.out.println("5-Cadastrar APLICATIVO GRATUITO");
+			System.out.println("6-Cadastrar APLICATIVO PAGO");
+			System.out.println("7-DELETAR APLICATIVO");
+			System.out.println("8-");
+
+			opcao = ler.nextLine();
+
+			switch (opcao) {
+
+			case "1": {  //CRIAR CONTA PESSOA JURÍDICA
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+				break;
+			}
+
+			case "2":
+
+				break;
+
+			case "3":
+
+				break;
+
+			case "4":
+
+				break;
+
+			case "5":
+
+				break;
+
+			case "6":
+
+				break;
+
+			default:
+				break;
+			}
+
+		} while (!opcao.equalsIgnoreCase("0"));
+
+	}
+
+}

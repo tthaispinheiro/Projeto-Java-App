@@ -1,0 +1,396 @@
+package appstorefactory;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+
+public class Pessoa {
+
+	private String nome;
+	private String telefone;
+	private String nomedeUsuario;
+	private String senha;
+	private String endereco;
+	private String email;
+	private String site;
+	private String numeroCartao;
+	private int codSeguranca;
+	private String validadeCartao;
+	private String titulardoCartao;
+	// private String caminhoBase = "D:\\workspace-projeto-final\\Contas\\";
+
+	public Pessoa() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Pessoa(String nome, String telefone, String nomedeUsuario, String senha, String endereco, String email,
+			String site, String numeroCartao, int codSeguranca, String validadeCartao, String titulardoCartao) {
+		super();
+		this.nome = nome;
+		this.telefone = telefone;
+		this.nomedeUsuario = nomedeUsuario;
+		this.senha = senha;
+		this.endereco = endereco;
+		this.email = email;
+		this.site = site;
+		this.numeroCartao = numeroCartao;
+		this.codSeguranca = codSeguranca;
+		this.validadeCartao = validadeCartao;
+		this.titulardoCartao = titulardoCartao;
+	}
+
+	// METODOS
+
+	public boolean cadastrar(String contas) { // CADASTRAR PESSOA FISICA E JURIDICA
+
+		try {
+
+			FileWriter fw = new FileWriter(contas, true); // ABRINDO ARQUIVO EM MODO ESCRITA
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			bw.write(nome + "#" + telefone + "#" + nomedeUsuario + "#" + senha + "#" + endereco + "#" + email + "#"
+					+ site);
+
+			bw.newLine();
+
+			bw.close();
+			fw.close();
+
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+
+	public boolean cadastrarCartao(String contas, String cpfProcurado) {
+
+		try {
+
+			FileWriter fw = new FileWriter(contas, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			bw.write("Numero do Cartão: " + numeroCartao + "#" + "Código de Segurança " + codSeguranca + "#"
+					+ "Validade: " + validadeCartao + "#" + "Titular do Cartão: " + titulardoCartao);
+
+			bw.newLine();
+			bw.close();
+			fw.close();
+
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return false;
+
+	}
+
+	public boolean verificarCartao() { // VERIFICAR CARTÃO
+
+		if (numeroCartao.length() == 14) {
+
+			return true;
+
+		}
+		if (numeroCartao.length() == 16) {
+
+			return true;
+
+		}
+
+		if (numeroCartao.contains("#") && numeroCartao.contains(":") && numeroCartao.contains("@")) {
+
+			return false;
+		}
+
+		else {
+
+			return false;
+		}
+	}
+
+	public boolean verificarCodSeguranca() { // VERIFICAR COD DE SEGURANÇA
+
+		if (codSeguranca > 2) {
+
+			return true;
+
+		}
+		
+		if(codSeguranca < 4) {
+			
+			
+			return true;
+		}
+
+		else {
+
+			return false;
+		}
+
+	}
+
+	public boolean excluirConta(String contas, String cpfProcurado) { // EXCLUIR CONTA FISICA
+
+		try {
+
+			FileReader fr = new FileReader(contas);
+			BufferedReader br = new BufferedReader(fr);
+
+			String temporario = contas.replace(".txt", "temporario.txt");
+			FileWriter fw = new FileWriter(temporario, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			while (br.ready()) {
+
+				String linha = br.readLine();
+				String vetor[] = linha.split("#");
+
+				if (vetor[6].equalsIgnoreCase(cpfProcurado)) {
+				} else {
+					bw.write(linha);
+					bw.newLine();
+				}
+
+			}
+
+			bw.close();
+			fw.close();
+			br.close();
+			fr.close();
+			transferir(temporario, contas);
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+
+	public void transferir(String contasOrigem, String contasDestino) { // TRANSFERINDO ARQ
+
+		try {
+
+			FileReader fr = new FileReader(contasOrigem);
+			BufferedReader br = new BufferedReader(fr);
+
+			FileWriter fw = new FileWriter(contasDestino);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			while (br.ready()) {
+
+				String linha = br.readLine();
+				bw.write(linha);
+				bw.newLine();
+
+			}
+
+			bw.close();
+			fw.close();
+			br.close();
+			fr.close();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public boolean verificarTelefone() { // VERIFICAR TELEFONE
+
+		if (telefone.length() == 11) { // TEL CELULAR
+
+			// ( 2 1 ) 9 6 4 7 0 - 1 2 9 2 ------ 11 ---------14
+			return true;
+		}
+
+		if (telefone.length() == 14 && telefone.charAt(0) == '(' && telefone.charAt(3) == ')'
+				&& telefone.charAt(9) == '-') {
+
+			return true;
+		}
+
+		if (telefone.length() == 10) { // TEL FIXO
+
+			return true;
+		}
+
+		if (telefone.length() == 13 && telefone.charAt(0) == '(' && telefone.charAt(3) == ')'
+				&& telefone.charAt(8) == '-') {
+
+			// ( 2 1 ) 3 5 1 8 - 8 2 0 4 ------- 10 ---------13
+			return true;
+
+		} else {
+
+			return false;
+		}
+
+	}
+
+	public boolean verificarUsuario() { // VERIFICAR USUARIO
+
+		if (nomedeUsuario.length() == 8) { // thapin12
+
+			return true;
+
+		} else {
+
+			return false;
+		}
+
+	}
+
+	public boolean verificarSenha() { // VERIFICAR SENHA
+
+		if (senha.length() == 10) { // tp12345615
+
+			return true;
+
+		} else {
+
+			return false;
+		}
+
+	}
+
+	public boolean verificarEndereco() { // VERIFICAR ENDEREÇO
+
+		if (endereco.equalsIgnoreCase(" ") && endereco.contains("@") && endereco.contains("!")
+				&& endereco.contains("%")) {
+
+			return false;
+
+		} else {
+
+			return true;
+		}
+
+	}
+
+	public boolean verificarEmail() { // VERIFICAÇÃO DE E-MAIL
+
+		if (email.contains("@") && email.contains(".com")) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+
+	}
+
+	public boolean verificarSite() { // VERIFICAÇÃO SITE
+
+		if (site.contains("www.") && site.contains(".com")) {
+
+			return true;
+		}
+
+		if (site.contains(".br")) {
+
+			return true;
+
+		} else {
+
+			return false;
+		}
+
+	}
+
+	// GET E SET
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getNomedeUsuario() {
+		return nomedeUsuario;
+	}
+
+	public void setNomedeUsuario(String nomedeUsuario) {
+		this.nomedeUsuario = nomedeUsuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+
+	public String getNumeroCartao() {
+		return numeroCartao;
+	}
+
+	public void setNumeroCartao(String numeroCartao) {
+		this.numeroCartao = numeroCartao;
+	}
+
+	public int getCodSeguranca() {
+		return codSeguranca;
+	}
+
+	public void setCodSeguranca(int codSeguranca) {
+		this.codSeguranca = codSeguranca;
+	}
+
+	public String getValidadeCartao() {
+		return validadeCartao;
+	}
+
+	public void setValidadeCartao(String validadeCartao) {
+		this.validadeCartao = validadeCartao;
+	}
+
+	public String getTitulardoCartao() {
+		return titulardoCartao;
+	}
+
+	public void setTitulardoCartao(String titulardoCartao) {
+		this.titulardoCartao = titulardoCartao;
+	}
+
+}

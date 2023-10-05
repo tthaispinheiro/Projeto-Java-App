@@ -1,0 +1,13 @@
+package appstorefactory;
+
+public class Pessoa {
+	
+	private String nome;
+	private String telefone;
+	private String NomedeUsuario;
+	private String email;
+	private String site;
+	
+	
+
+}

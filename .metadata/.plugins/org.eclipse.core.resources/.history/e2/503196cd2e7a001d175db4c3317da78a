@@ -1,0 +1,251 @@
+package appstorefactory;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+
+public class Fisica extends Pessoa {
+
+	private String cpf;
+	private String rg;
+	// private String caminho = "fisica.txt";
+
+	public Fisica() { // CONSTRUTOR VAZIO
+		super();
+	}
+
+	public Fisica(String cpf, String rg) { // CONSTRUTOR CHEIO
+		super();
+		this.cpf = cpf;
+		this.rg = rg;
+	}
+
+	public Fisica(String nome, String telefone, String nomedeUsuario, String senha, String endereco, String email,
+			String site, String numeroCartao, int codSeguranca, String validadeCartao, String titulardoCartao) {
+		super(nome, telefone, nomedeUsuario, senha, endereco, email, site, numeroCartao, codSeguranca, validadeCartao,
+				titulardoCartao); // CONSTRUTOR PAI
+
+	}
+
+	// METODOS
+
+	public boolean cadastrar(String contas) { // CADASTRAR PESSOA FISICA
+
+		contas = contas + "fisica.txt";
+		try {
+
+			FileWriter fw = new FileWriter(contas, true); // ABRINDO ARQUIVO EM MODO ESCRITA
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			bw.write(getNome() + "#" + getTelefone() + "#" + getNomedeUsuario() + "#" + getSenha() + getEndereco() + "#"
+					+ getEmail() + "#" + getSite() + "#" + cpf + "#" + rg);
+
+			bw.newLine();
+
+			bw.close();
+			fw.close();
+			return true;
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	public boolean cadastrarCartao(String contas, String cpfProcurado) { // CADASTRAR CARTAO PESSOA FISICA
+
+		contas = contas + "cadastrarCartaopessoaFisica.txt";
+		try {
+
+			FileWriter fw = new FileWriter(contas, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			bw.write("Numero do Cartão: " + getNumeroCartao() + "#" + "Código de Segurança: " + getCodSeguranca()
+					+ "Validade: " + getValidadeCartao() + "#" + "Titular do Cartão: " + getTitulardoCartao());
+
+			bw.newLine();
+
+			bw.close();
+			fw.close();
+
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+
+//	public void excluirConta(String cpfProcurado) { // EXCLUIR CONTA FISICA
+	// super.excluirConta(caminho, cpfProcurado);
+	// }
+
+	public boolean excluirConta(String contas, String cpfProcurado) { // EXCLUIR CONTA FISICA
+
+		contas = contas + "fisica.txt";
+		try {
+
+			FileReader fr = new FileReader(contas);
+			BufferedReader br = new BufferedReader(fr);
+
+			String temporario = contas.replace(".txt", "temporario.txt");
+			FileWriter fw = new FileWriter(temporario, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+
+			while (br.ready()) {
+
+				String linha = br.readLine();
+				String vetor[] = linha.split("#");
+
+				if (vetor[6].equalsIgnoreCase(cpfProcurado)) {
+				} else {
+					bw.write(linha);
+					bw.newLine();
+				}
+
+			}
+
+			bw.close();
+			fw.close();
+			br.close();
+			fr.close();
+			transferir(temporario, contas);
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+
+	public void exibirContas(String contas) { // EXIBIR CONTAS PESSOA FISICA
+
+		contas = contas + "fisica.txt";
+
+		try {
+
+			FileReader fr = new FileReader(contas);
+			BufferedReader br = new BufferedReader(fr);
+
+			while (br.ready()) {
+
+				String linha = br.readLine();
+				String vetor[] = linha.split("#");
+
+				System.out.println("Nome: " + vetor[0] + "\n" + "Telefone: " + vetor[1] + "\n" + "Nome de Usuário: "
+						+ vetor[2] + "\n" + "Endereço: " + vetor[3] + "\n" + "E-mail: " + vetor[4] + "\n" + "Site: "
+						+ vetor[5] + "\n" + "Cpf: " + vetor[6] + "\n" + "RG: " + vetor[7] + "\n");
+
+			}
+
+			br.close();
+			fr.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+	}
+
+	public boolean verificarCpf() { // VERIFICAR CPF
+
+		if (cpf.length() == 14 && cpf.charAt(3) == '.' && cpf.charAt(7) == '.' && cpf.charAt(11) == '-') {
+
+			return true;
+
+			// cpf.length() == 11 && cpf.length() == 14 && cpf.charAt(3) == '.' &&
+			// cpf.charAt(7) == '.'
+			// && cpf.charAt(11) == '-'
+			
+			
+			//072.716.725-16
+
+		} else {
+
+			if (cpf.length() == 11) {
+
+				return true;
+
+			} else {
+				return false;
+			}
+
+		}
+
+	}
+
+	public boolean verificarRg() { // VERIFICAR RG
+
+		if (rg.length() == 9) {
+
+			return true;
+		} else {
+
+			if (rg.length() == 12 && rg.charAt(2) == '.' && rg.charAt(6) == '.' && rg.charAt(10) == '-') {
+
+				return true;
+			} else {
+
+				return false;
+			}
+
+			// 12.345.678-9
+
+		}
+
+	}
+	
+
+	public boolean localizar(String cpf, String contas) {   
+
+		try {
+			FileReader fr = new FileReader(contas);
+			BufferedReader br = new BufferedReader(fr);
+
+			while (br.ready()) {
+
+				String linha = br.readLine();
+				String vetor[] = linha.split("#");
+
+				if (vetor[3].equalsIgnoreCase(cpf)) {
+
+					return true;
+				}
+
+			}
+
+			br.close();
+			fr.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+
+	// GET E SET
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+}

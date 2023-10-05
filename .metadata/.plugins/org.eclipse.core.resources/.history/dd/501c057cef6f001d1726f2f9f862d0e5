@@ -1,0 +1,10 @@
+package appstorefactory;
+
+public class Juridica {
+	
+	private String cnpj;
+	private String razaoSocial;
+	private String numeroDeInscricao;
+	
+
+}

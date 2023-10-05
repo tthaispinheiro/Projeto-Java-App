@@ -1,0 +1,100 @@
+package appstorefactory;
+
+public class Pessoa {
+
+	private String nome;
+	private String telefone;
+	private String NomedeUsuario;
+	private String senha;
+	private String endereco;
+	private String email;
+	private String site;
+	private int numerodoCartao;
+
+	public Pessoa() { // CONSTRUTOR VAZIO
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Pessoa(String nome, String telefone, String nomedeUsuario, String senha, String endereco, String email,
+			String site, int numerodoCartao) { // CONSTRUTOR CHEIO
+		super();
+		this.nome = nome;
+		this.telefone = telefone;
+		NomedeUsuario = nomedeUsuario;
+		this.senha = senha;
+		this.endereco = endereco;
+		this.email = email;
+		this.site = site;
+		this.numerodoCartao = numerodoCartao;
+	}
+	
+	
+	
+
+//GET E SET 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getNomedeUsuario() {
+		return NomedeUsuario;
+	}
+
+	public void setNomedeUsuario(String nomedeUsuario) {
+		NomedeUsuario = nomedeUsuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+
+	public int getNumerodoCartao() {
+		return numerodoCartao;
+	}
+
+	public void setNumerodoCartao(int numerodoCartao) {
+		this.numerodoCartao = numerodoCartao;
+	}
+
+}

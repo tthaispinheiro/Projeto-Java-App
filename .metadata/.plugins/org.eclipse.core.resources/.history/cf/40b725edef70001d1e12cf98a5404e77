@@ -1,0 +1,60 @@
+package appstorefactoryFree_Premium;
+
+public class App_Pago extends App {
+
+	private double preço;
+	private String conteudosExclusivos;
+
+	public App_Pago() { // CONSTRUTOR VAZIO
+		super();
+	}
+
+	public App_Pago(double preço, String conteudosExclusivos) { // CONSTRUTOR CHEIO
+		super();
+		this.preço = preço;
+		this.conteudosExclusivos = conteudosExclusivos;
+	}
+
+	public App_Pago(String nomeApp, String categoria, double valor, double versão, String notasDaVersao,
+			String politicaDePrivacidade, String emailSuporte, String publicoAlvo, String permissoes,
+			String compatibilidade) {
+		super(nomeApp, categoria, valor, versão, notasDaVersao, politicaDePrivacidade, emailSuporte, publicoAlvo,
+				permissoes, compatibilidade);
+		// CONTRUTOR DO PAI
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//GET E SET 
+
+	public double getPreço() {
+		return preço;
+	}
+
+	public void setPreço(double preço) {
+		this.preço = preço;
+	}
+
+	public String getConteudosExclusivos() {
+		return conteudosExclusivos;
+	}
+
+	public void setConteudosExclusivos(String conteudosExclusivos) {
+		this.conteudosExclusivos = conteudosExclusivos;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+}

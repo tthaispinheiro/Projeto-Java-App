@@ -1,0 +1,231 @@
+package appstorefactory;
+
+import java.util.Scanner;
+
+import appstorefactoryFree_Premium.App;
+
+public class Principal {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner ler = new Scanner(System.in);
+		String opcao;
+		String contas = "C:\\Users\\thapi\\OneDrive\\Documentos\\workspace-projeto-final\\Contas\\";
+		String aplicativos = "C:\\Users\\thapi\\OneDrive\\Documentos\\workspace-projeto-final\\Contas\\Aplicativos";
+
+		do {
+
+			System.out.println("Menu");
+			System.out.println("1-Criar Conta Desenvolvedor PESSOA FISICA");
+			System.out.println("2-Criar Conta Desenvolvedor PESSOA JURIDICA");
+			System.out.println("3-Cadastrar CARTÃO PESSOA FISICA");
+			System.out.println("4-Cadastrar CARTÃO PESSOA JURIDICA");
+			System.out.println("5-Cadastrar APLICATIVO GRATUITO");
+			System.out.println("6-Cadastrar APLICATIVO PAGO");
+			System.out.println("7-DELETAR APLICATIVO");
+			System.out.println("8-");
+
+			opcao = ler.nextLine();
+
+			switch (opcao) {
+
+			case "1": {
+				{ // CRIAR CONTA PESSOA FISICA
+
+					Fisica pessoaFisica = new Fisica(); // INSTANCIANDO O OBJETO PESSOA FISICA
+
+					System.out.println("Nome Completo: ");
+					pessoaFisica.setNome(ler.nextLine());
+
+					System.out.println("Cpf: ");
+					pessoaFisica.setCpf(ler.nextLine());
+
+					System.out.println("RG: ");
+					pessoaFisica.setRg(ler.nextLine());
+
+					System.out.println("Telefone: ");
+					pessoaFisica.setTelefone(ler.nextLine());
+
+					System.out.println("Crie um nome de usuário: ");
+					pessoaFisica.setNomedeUsuario(ler.nextLine());
+
+					System.out.println("Cria uma senha: "); // CRIAR CASOS DE EXCESSAO PARA SENHA
+					pessoaFisica.setSenha(ler.nextLine());
+
+					System.out.println("Endereço:  ");
+					pessoaFisica.setEndereco(ler.nextLine());
+
+					System.out.println("Email: "); // CRIAR CASOS DE EXCESSAO PARA EMAIL
+					pessoaFisica.setEmail(ler.nextLine());
+
+					System.out.println("Site: ");
+					pessoaFisica.setSite(ler.nextLine());
+
+					if (pessoaFisica.cadastrar(contas)) {
+
+						System.out.println("Cadastro de Pessoa Física, realizado com sucesso!!");
+
+					} else {
+
+						System.out.println("Erro ao cadastrar! Tente novamente ou mais tarde!");
+
+					}
+
+					break;
+				}
+			}
+
+			case "2": { // CRIAR CONTA PESSOA JURIDICA
+
+				Juridica pessoaJuridica = new Juridica(); // INSTANCIANDO OBJETO
+
+				System.out.println("Razão Social: ");
+				pessoaJuridica.setRazaoSocial(ler.nextLine());
+
+				System.out.println("Nome Fantasia: ");
+				pessoaJuridica.setNome(ler.nextLine());
+
+				System.out.println("CNPJ: "); // CRIAR CASO CASO EXCESSÃO
+				pessoaJuridica.setCnpj(ler.nextLine());
+
+				System.out.println("Número de Inscrição: "); // CRIAR CASO CASO EXCESSÃO
+				pessoaJuridica.setNumeroDeInscricao(ler.nextLine());
+
+				System.out.println("Telefone Comercial: ");
+				pessoaJuridica.setTelefone(ler.nextLine());
+
+				System.out.println("Endereço Comercial: ");
+				pessoaJuridica.setEndereco(ler.nextLine());
+
+				System.out.println("Crie um nome de Usuário: ");
+				pessoaJuridica.setNomedeUsuario(ler.nextLine());
+
+				System.out.println("Crie uma senha: "); // CRIAR CASOS DE EXCESSAO PARA SENHA
+				pessoaJuridica.setSenha(ler.nextLine());
+
+				System.out.println("E-mail: ");
+				pessoaJuridica.setEmail(ler.nextLine()); // CRIAR CASOS DE EXCESSAO P IMAIL
+
+				System.out.println("Caso tenha algum site, favor informar: "); // CRIAR CASOS DE EXCESSAO P SITE
+				pessoaJuridica.setSite(ler.nextLine());
+
+				if (pessoaJuridica.cadastrar(contas)) {
+
+					System.out.println("Cadastro de Pessoa Jurídica,realizado com sucesso!!");
+
+				} else {
+
+					System.out.println("Erro ao cadastrar! Tente novamente ou mais tarde!");
+
+				}
+
+				break;
+			}
+
+			case "3": { // CADASTRAR CARTÃO PESSOA FISICA
+
+				System.out.println("Informe o CPF da conta que deseja cadastrar o cartão: ");
+				String cpfProcurado = ler.nextLine();
+
+				System.out.println("Informe o Número do cartão: ");
+				int numeroDoCartao = Integer.parseInt(ler.nextLine());
+
+				if (numeroDoCartao < 16 && numeroDoCartao > 16) {
+
+					System.out.println("Número de cartão inválido!");
+
+				} else {
+
+					Fisica cadastrarCartao = new Fisica();
+					cadastrarCartao.cadastrarCartao(contas, cpfProcurado, numeroDoCartao);
+
+					System.out.println("Cartão cadastrado com sucesso!");
+				}
+				break;
+			}
+
+			case "4": { // CADASTRAR CARTÃO PESSOA JURIDICA
+
+				System.out.println("Informe o CPF da conta que deseja cadastrar o cartão: ");
+				String cnpjProcurado = ler.nextLine();
+
+				System.out.println("Informe o número do Cartão: ");
+				int numeroDoCartao = Integer.parseInt(ler.nextLine());
+
+				if (numeroDoCartao < 16 && numeroDoCartao > 16) {
+
+					System.out.println("Número de cartão inválido!");
+
+				} else {
+
+					Juridica cadastrarCartaoJ = new Juridica();
+					cadastrarCartaoJ.cadastrarCartaoJuridico(contas, cnpjProcurado, numeroDoCartao);
+					System.out.println("Cartão cadastrado com sucesso!");
+				}
+
+				break;
+			}
+
+			case "5": {// CADASTRAR APLICATIVO GRATUITO
+
+				App ap = new App();
+
+				System.out.println("Nome do Aplicativo: ");
+				ap.setNomeApp(ler.nextLine());
+
+				System.out.println("Categoria: ");
+				ap.setCategoria(ler.nextLine());
+
+				System.out.println("Versão:  ");
+				ap.setVersao(Double.parseDouble(ler.nextLine()));
+
+				System.out.println("Notas da Versão: ");
+				ap.setNotasDaVersao(ler.nextLine());
+
+				System.out.println("Politica de privacidade: ");
+				ap.setPoliticaDePrivacidade(ler.nextLine());
+
+				System.out.println("E-mail de suporte: "); // FAZER CASO DE EXCESSÃO
+				ap.setEmailSuporte(ler.nextLine());
+
+				System.out.println("Público Alvo: ");
+				ap.setPublicoAlvo(ler.nextLine());
+
+				System.out.println("Permissões:  ");
+				ap.setPermissoes(ler.nextLine());
+
+				System.out.println("Compatibilidade: ");
+				ap.setCompatibilidade(ler.nextLine());
+
+				if(ap.cadastrarApp(aplicativos)) {
+					
+					
+					System.out.println("Cartão cadastrado com sucesso!");
+					
+					
+				}else {
+					
+					
+					System.out.println("ERRO!");
+					
+					
+				}
+
+				break;
+			}
+
+			case "6":
+
+				break;
+
+			default:
+				break;
+			}
+
+		} while (!opcao.equalsIgnoreCase("0"));
+
+		ler.close();
+	}
+
+}
